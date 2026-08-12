@@ -136,7 +136,15 @@ Juego completo para el `<head>`:
 
 ### `mascota/`
 
-`mascota.webp` — Eve. Asistente digital, onboarding, estados vacíos. **No usar** en documentos legales, facturas ni en el flujo de pago de EvePay.
+`mascota.webp` (512×512, fondo transparente) — Eve. Asistente digital, onboarding, estados vacíos. **No usar** en documentos legales, facturas ni en el flujo de pago de EvePay.
+
+`https://cdn.jsdelivr.net/gh/Evetev-Dev/brand@1/mascota/mascota.webp`
+
+`mascota-saludando.png` (1024×1024, transparente) — el que usa la web corporativa.
+
+`https://cdn.jsdelivr.net/gh/Evetev-Dev/brand@1/mascota/mascota-saludando.png`
+
+Los **demás** sprites de Eve (caminando, riendo, pensativa…) no están publicados: viven solo en el monorepo, en `packages/brand/assets/mascota/`. Se publican de uno en uno, cuando una página los necesita.
 
 ### `tokens/`
 
