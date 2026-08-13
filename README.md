@@ -199,6 +199,11 @@ desvanecida, nunca a plena opacidad detrás de un texto.
 
 `https://cdn.jsdelivr.net/gh/Evetev-Dev/brand@1/ilustraciones/conjunto-residencial.webp`
 
+**Se generan con un prompt fijo**, para que parezcan una familia y no un
+muestrario: está en `evetev_brand_styles.md` §4, «Ilustraciones de apoyo». Ahí
+también está qué hacer antes de publicar una nueva — convertir a WebP, subirla
+aquí y **etiquetar**, porque sin etiqueta `@1` no la sirve.
+
 ### `tokens/`
 
 `colores.css` (variables CSS listas) · `colores.json` (para Tailwind, Figma o scripts).
