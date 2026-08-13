@@ -186,6 +186,19 @@ estar: este repositorio distribuye lo optimizado para web.
 `mascota-saludando.png` se mantiene además en PNG porque `evetev.com/nosotros`
 ya lo enlaza así, y la regla 2 de abajo dice que lo publicado no se retira.
 
+### `ilustraciones/`
+
+Escenas de producto, no marca. A diferencia de logos y mascota, **no representan
+a Evetev**: ilustran el contexto de una vertical. Por eso no las rigen las reglas
+de contraste T1/T2 — pero sí la regla de que el texto encima tenga que leerse.
+
+`conjunto-residencial.webp` (1344×768, fondo blanco) — conjunto residencial en
+trazo técnico, azul y violeta sobre blanco. Para **EveConecta**, que es la
+vertical de propiedad horizontal. Es una escena densa: va de fondo, atenuada y
+desvanecida, nunca a plena opacidad detrás de un texto.
+
+`https://cdn.jsdelivr.net/gh/Evetev-Dev/brand@1/ilustraciones/conjunto-residencial.webp`
+
 ### `tokens/`
 
 `colores.css` (variables CSS listas) · `colores.json` (para Tailwind, Figma o scripts).
