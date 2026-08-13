@@ -1,0 +1,9 @@
+# Basura del Finder de macOS. Importa más aquí que en otros repos: este se
+# sirve por CDN y su listado es el catálogo que consultan las personas —y el
+# agente de EveStudio— para saber qué activos existen. Un .DS_Store versionado
+# aparece ahí como si fuera uno más.
+.DS_Store
+._*
+
+# Miniaturas de Windows, por si alguien clona desde allí.
+Thumbs.db
