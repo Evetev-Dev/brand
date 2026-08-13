@@ -144,7 +144,47 @@ Juego completo para el `<head>`:
 
 `https://cdn.jsdelivr.net/gh/Evetev-Dev/brand@1/mascota/mascota-saludando.png`
 
-Los **demás** sprites de Eve (caminando, riendo, pensativa…) no están publicados: viven solo en el monorepo, en `packages/brand/assets/mascota/`. Se publican de uno en uno, cuando una página los necesita.
+#### El repertorio completo (`.webp`, 1024×1024, transparente)
+
+Las 22 poses de Eve, publicadas de una vez. Antes vivían solo en el monorepo y
+se subían de una en una: eso dejaba a quien maquetaba —y al agente de EveStudio,
+que lee este repositorio— eligiendo entre dos imágenes o citando URLs de
+archivos que no existían.
+
+| Pose | Archivo | Cuándo |
+|---|---|---|
+| Saludando | `mascota-saludando.webp` | bienvenida, portada |
+| Neutral | `mascota-neutral.webp`, `mascota-neutral-2.webp` | acompañar sin protagonismo |
+| Sonrisa suave | `mascota-sonrisa-suave.webp` | confirmaciones discretas |
+| Sonrisa emocionada | `mascota-sonrisa-emocionada.webp` | éxito, meta cumplida |
+| Riendo | `mascota-riendo.webp` | celebración |
+| Cantando | `mascota-cantando.webp` | anuncios, novedades |
+| Pensativa | `mascota-pensativa.webp` | procesando, «lo estamos revisando» |
+| Curiosa | `mascota-curiosa.webp` | descubrimiento, ayuda contextual |
+| Sorprendida | `mascota-sorprendida.webp` | avisos, algo inesperado |
+| Frotando el ojo | `mascota-frotando-ojo.webp` | estado vacío, «aquí no hay nada todavía» |
+| Estudio | `mascota-estudio.webp` | documentación, aprendizaje |
+| Sentada | `mascota-sentada.webp` | espera, pantallas en calma |
+| Caminando | `mascota-caminando.webp` | progreso, pasos de un flujo |
+| Saltando | `mascota-saltando.webp` | logro, gamificación |
+| Perfil izquierdo / derecho | `mascota-perfil-izquierdo.webp`, `mascota-perfil-derecho.webp` | mirando hacia el contenido de al lado |
+| Primer plano | `mascota-primer-plano.webp`, `mascota-primer-plano-2.webp`, `mascota-primer-plano-3.webp` | avatares, iconos grandes |
+| Arriba | `arriba.webp` (1376×768) | cabeceras apaisadas |
+| Original | `mascota-original.webp` (1408×1117) | referencia del diseño inicial |
+
+```
+https://cdn.jsdelivr.net/gh/Evetev-Dev/brand@1/mascota/mascota-pensativa.webp
+```
+
+**Por qué `.webp` y no los PNG del monorepo:** los originales pesan entre 390 KB
+y 1,1 MB cada uno. En web eso no es aceptable para una imagen decorativa, así
+que aquí se publican convertidos a WebP con calidad 85 y transparencia intacta —
+las mismas 22 imágenes pasan de 16,2 MB a 1,5 MB, un 9 %. Los PNG maestros
+siguen en el monorepo (`packages/brand/assets/mascota/`), que es donde deben
+estar: este repositorio distribuye lo optimizado para web.
+
+`mascota-saludando.png` se mantiene además en PNG porque `evetev.com/nosotros`
+ya lo enlaza así, y la regla 2 de abajo dice que lo publicado no se retira.
 
 ### `tokens/`
 
