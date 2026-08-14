@@ -192,17 +192,29 @@ Escenas de producto, no marca. A diferencia de logos y mascota, **no representan
 a Evetev**: ilustran el contexto de una vertical. Por eso no las rigen las reglas
 de contraste T1/T2 — pero sí la regla de que el texto encima tenga que leerse.
 
-`conjunto-residencial.webp` (1344×768, fondo blanco) — conjunto residencial en
-trazo técnico, azul y violeta sobre blanco. Para **EveConecta**, que es la
-vertical de propiedad horizontal. Es una escena densa: va de fondo, atenuada y
-desvanecida, nunca a plena opacidad detrás de un texto.
+**`conjunto-residencial.svg`** (viewBox 1344×768, fondo blanco) — conjunto
+residencial en trazo técnico, una sola tinta `#1E6FEB`. Para **EveConecta**, la
+vertical de propiedad horizontal. **Esta es la buena.**
 
-`https://cdn.jsdelivr.net/gh/Evetev-Dev/brand@1/ilustraciones/conjunto-residencial.webp`
+`https://cdn.jsdelivr.net/gh/Evetev-Dev/brand@1/ilustraciones/conjunto-residencial.svg`
 
-**Se generan con un prompt fijo**, para que parezcan una familia y no un
-muestrario: está en `evetev_brand_styles.md` §4, «Ilustraciones de apoyo». Ahí
-también está qué hacer antes de publicar una nueva — convertir a WebP, subirla
-aquí y **etiquetar**, porque sin etiqueta `@1` no la sirve.
+Es una escena densa: va de fondo, atenuada y desvanecida, nunca a plena opacidad
+detrás de un texto.
+
+`conjunto-residencial.webp` (1344×768) es la versión anterior, generada con un
+modelo. **Superada**, pero se mantiene publicada porque la regla 2 dice que lo
+publicado no se retira. No la uses en algo nuevo: pesa 148 KB frente a 5,8 KB y
+tiene trazos violeta que se salen de la paleta.
+
+**Este SVG no se edita a mano.** Su fuente es
+`packages/brand/ilustraciones/conjunto-residencial.py` en el monorepo, que además
+comprueba al generar que no queden trazos a menos de 24 unidades — la regla que
+más cuesta cumplir a ojo. Toca el script y vuelve a generar.
+
+**Las ilustraciones se generan con un prompt fijo**, para que parezcan una
+familia y no un muestrario: está en `evetev_brand_styles.md` §4, «Ilustraciones
+de apoyo». Ahí también está qué hacer antes de publicar una nueva, incluido
+**etiquetar** — sin etiqueta `@1` no la sirve.
 
 ### `tokens/`
 
