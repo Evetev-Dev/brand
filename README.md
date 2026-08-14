@@ -192,24 +192,40 @@ Escenas de producto, no marca. A diferencia de logos y mascota, **no representan
 a Evetev**: ilustran el contexto de una vertical. Por eso no las rigen las reglas
 de contraste T1/T2 — pero sí la regla de que el texto encima tenga que leerse.
 
-**`conjunto-residencial.svg`** (viewBox 1344×768, fondo blanco) — conjunto
-residencial en trazo técnico, una sola tinta `#1E6FEB`. Para **EveConecta**, la
-vertical de propiedad horizontal. **Esta es la buena.**
+**`conjunto-residencial-color.svg`** (viewBox 1344×768) — conjunto residencial en
+trazo técnico `#1E6FEB`, con **dos elementos rellenos de color**: la torre de la
+izquierda en `#144A96` y el árbol de la derecha en `#16A34A`. Para **EveConecta**,
+la vertical de propiedad horizontal. **Esta es la buena.**
 
-`https://cdn.jsdelivr.net/gh/Evetev-Dev/brand@1/ilustraciones/conjunto-residencial.svg`
+`https://cdn.jsdelivr.net/gh/Evetev-Dev/brand@1/ilustraciones/conjunto-residencial-color.svg`
 
 Es una escena densa: va de fondo, atenuada y desvanecida, nunca a plena opacidad
 detrás de un texto.
 
-`conjunto-residencial.webp` (1344×768) es la versión anterior, generada con un
-modelo. **Superada**, pero se mantiene publicada porque la regla 2 dice que lo
-publicado no se retira. No la uses en algo nuevo: pesa 148 KB frente a 5,8 KB y
-tiene trazos violeta que se salen de la paleta.
+**El color va a los lados, y eso no es composición: es un requisito.** La landing
+de EveConecta la usa de fondo abriéndole un hueco radial en el centro, para que
+las líneas no crucen el titular. Cualquier elemento con color puesto al medio cae
+dentro de ese hueco y no se ve — comprobado en el navegador con una versión que
+tenía la torre y el árbol centrados: no aparecían ni subiendo la opacidad.
 
-**Este SVG no se edita a mano.** Su fuente es
+Pesa 6,7 KB. Se probó antes una versión raster de la misma escena y pesaba
+202 KB, de los cuales 106 KB eran solo el canal alfa —imprescindible, porque con
+`contain` sobra ancho a los lados y un blanco opaco dibujaría el rectángulo de la
+imagen recortado contra el degradado—. En SVG la transparencia es gratis. Por eso
+el manual dice que estas escenas se dibujen en SVG siempre que se pueda.
+
+`conjunto-residencial.svg` (viewBox 1344×768) es la versión de una sola tinta,
+sin color. Sigue publicada; úsala donde el color de los dos elementos no aporte.
+
+**Ninguno de los dos SVG se edita a mano.** Los dos salen del mismo script,
 `packages/brand/ilustraciones/conjunto-residencial.py` en el monorepo, que además
 comprueba al generar que no queden trazos a menos de 24 unidades — la regla que
 más cuesta cumplir a ojo. Toca el script y vuelve a generar.
+
+`conjunto-residencial.webp` (1344×768) es la primera versión generada.
+**Superada**, pero se mantiene publicada porque la regla 2 dice que lo publicado
+no se retira. No la uses en algo nuevo: tiene trazos violeta que se salen de la
+paleta.
 
 **Las ilustraciones se generan con un prompt fijo**, para que parezcan una
 familia y no un muestrario: está en `evetev_brand_styles.md` §4, «Ilustraciones
