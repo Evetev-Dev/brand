@@ -199,16 +199,26 @@ líneas. Para **EveConecta**, la vertical de propiedad horizontal.
 
 `https://cdn.jsdelivr.net/gh/Evetev-Dev/brand@1/ilustraciones/conjunto-residencial-color.svg`
 
-**`comercio.svg`** (viewBox 1344×768) — cuatro locales con vitrina, puerta y
-toldo, en el mismo trazo y con las mismas reglas: el toldo del local de la
-izquierda en `#144A96`, el del extremo derecho en `#16A34A`, y halo. Para
-**EvePay**, la pasarela de pagos.
+**`flujo-de-pago.svg`** (viewBox 1344×768) — la tarjeta del cliente, el datáfono
+del comercio y la caja donde cae el dinero, unidos por dos flechas. Para
+**EvePay**, la pasarela de pagos. Color en el cuerpo de la tarjeta (`#144A96`) y
+en la rueda de la caja (`#16A34A`), y halo.
 
-`https://cdn.jsdelivr.net/gh/Evetev-Dev/brand@1/ilustraciones/comercio.svg`
+`https://cdn.jsdelivr.net/gh/Evetev-Dev/brand@1/ilustraciones/flujo-de-pago.svg`
 
 Las dos son **las buenas** de su producto, y son hermanas a propósito: misma
 dirección de fuga, mismo lienzo, mismas cotas de color y de halo. Puestas una al
 lado de otra tienen que parecer la misma mano.
+
+**Misma mano, no mismo asunto.** Es la distinción que costó una versión: la
+primera escena de EvePay fue una calle de comercios, construida copiando la de
+EveConecta —prismas con rejilla de ventanas—, y esas rejillas ganan la lectura.
+La portada de una pasarela de pagos acababa ilustrando ladrillo. Lo que se
+comparte es el **estilo**; el **tema** lo pone cada producto.
+
+`comercio.svg` es esa primera escena. **Superada**, pero se mantiene publicada
+porque la regla 2 dice que lo publicado no se retira. No la uses: para EvePay
+está `flujo-de-pago.svg`, y para una escena de edificios está la de EveConecta.
 
 ### El halo
 
@@ -245,9 +255,10 @@ el manual dice que estas escenas se dibujen en SVG siempre que se pueda.
 sin color. Sigue publicada; úsala donde el color de los dos elementos no aporte.
 
 **Ningún SVG de esta carpeta se edita a mano.** Cada escena tiene su script en
-`packages/brand/ilustraciones/` del monorepo —`conjunto-residencial.py` y
-`comercio.py`—, y los dos comprueban al generar que no queden trazos a menos de
-24 unidades, la regla que más cuesta cumplir a ojo. Toca el script y regenera.
+`packages/brand/ilustraciones/` del monorepo —`conjunto-residencial.py`,
+`flujo-de-pago.py` y el superado `comercio.py`—, y todos comprueban al generar
+que no queden trazos a menos de 24 unidades, la regla que más cuesta cumplir a
+ojo. Toca el script y regenera.
 
 Los dos aceptan `--sin-color` y `--sin-glow`. `--sin-glow` no es un capricho:
 existe para poder reproducir `conjunto-residencial.svg` **byte a byte** tal como
