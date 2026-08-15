@@ -194,10 +194,37 @@ de contraste T1/T2 — pero sí la regla de que el texto encima tenga que leerse
 
 **`conjunto-residencial-color.svg`** (viewBox 1344×768) — conjunto residencial en
 trazo técnico `#1E6FEB`, con **dos elementos rellenos de color**: la torre de la
-izquierda en `#144A96` y el árbol de la derecha en `#16A34A`. Para **EveConecta**,
-la vertical de propiedad horizontal. **Esta es la buena.**
+izquierda en `#144A96` y el árbol de la derecha en `#16A34A`, y **halo** en las
+líneas. Para **EveConecta**, la vertical de propiedad horizontal.
 
 `https://cdn.jsdelivr.net/gh/Evetev-Dev/brand@1/ilustraciones/conjunto-residencial-color.svg`
+
+**`comercio.svg`** (viewBox 1344×768) — cuatro locales con vitrina, puerta y
+toldo, en el mismo trazo y con las mismas reglas: el toldo del local de la
+izquierda en `#144A96`, el del extremo derecho en `#16A34A`, y halo. Para
+**EvePay**, la pasarela de pagos.
+
+`https://cdn.jsdelivr.net/gh/Evetev-Dev/brand@1/ilustraciones/comercio.svg`
+
+Las dos son **las buenas** de su producto, y son hermanas a propósito: misma
+dirección de fuga, mismo lienzo, mismas cotas de color y de halo. Puestas una al
+lado de otra tienen que parecer la misma mano.
+
+### El halo
+
+Las dos llevan el «glow controlado» que pide el prompt (§4). En un raster el
+modelo lo resuelve solo; en SVG son **dos capas**: la escena desenfocada debajo,
+sin rellenos, y la nítida encima. Sin quitarle los rellenos a la capa de abajo
+el desenfoque da una nube gris alrededor de cada volumen en vez de un halo en
+las líneas, y además tapa el halo de lo que tiene detrás.
+
+`stdDeviation="5"` sobre un lienzo de 1344, elegido mirando: a 2,2 no se ve
+—estas escenas se muestran a menos de la mitad de su tamaño y el desenfoque se
+encoge con ellas— y a 7 se mete dentro de las caras blancas y el dibujo pierde
+el filo de plano. **Es relativo al viewBox**, así que si algún día cambia el
+ancho del lienzo hay que volver a mirarlo.
+
+Cuesta unos 6 KB por archivo, que es el precio de duplicar la geometría.
 
 Es una escena densa: va de fondo, atenuada y desvanecida, nunca a plena opacidad
 detrás de un texto.
@@ -217,10 +244,15 @@ el manual dice que estas escenas se dibujen en SVG siempre que se pueda.
 `conjunto-residencial.svg` (viewBox 1344×768) es la versión de una sola tinta,
 sin color. Sigue publicada; úsala donde el color de los dos elementos no aporte.
 
-**Ninguno de los dos SVG se edita a mano.** Los dos salen del mismo script,
-`packages/brand/ilustraciones/conjunto-residencial.py` en el monorepo, que además
-comprueba al generar que no queden trazos a menos de 24 unidades — la regla que
-más cuesta cumplir a ojo. Toca el script y vuelve a generar.
+**Ningún SVG de esta carpeta se edita a mano.** Cada escena tiene su script en
+`packages/brand/ilustraciones/` del monorepo —`conjunto-residencial.py` y
+`comercio.py`—, y los dos comprueban al generar que no queden trazos a menos de
+24 unidades, la regla que más cuesta cumplir a ojo. Toca el script y regenera.
+
+Los dos aceptan `--sin-color` y `--sin-glow`. `--sin-glow` no es un capricho:
+existe para poder reproducir `conjunto-residencial.svg` **byte a byte** tal como
+está publicado, y esa comprobación es la que demuestra que un cambio nuevo no
+movió la escena.
 
 `conjunto-residencial.webp` (1344×768) es la primera versión generada.
 **Superada**, pero se mantiene publicada porque la regla 2 dice que lo publicado
