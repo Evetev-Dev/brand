@@ -192,83 +192,48 @@ Escenas de producto, no marca. A diferencia de logos y mascota, **no representan
 a Evetev**: ilustran el contexto de una vertical. Por eso no las rigen las reglas
 de contraste T1/T2 — pero sí la regla de que el texto encima tenga que leerse.
 
-**`conjunto-residencial-color.svg`** (viewBox 1344×768) — conjunto residencial en
-trazo técnico `#1E6FEB`, con **dos elementos rellenos de color**: la torre de la
-izquierda en `#144A96` y el árbol de la derecha en `#16A34A`, y **halo** en las
-líneas. Para **EveConecta**, la vertical de propiedad horizontal.
+> **Toda esta carpeta está pendiente de rehacerse.** Los cinco archivos de abajo
+> siguen publicados —lo publicado no se retira— pero **ninguno cumple la norma
+> vigente**, que es: las escenas se **generan** con el prompt del manual (§4) y
+> se publican en **WebP con transparencia**. Los cuatro `.svg` se dibujaron a
+> mano en Python durante la temporada en que el manual recomendaba SVG, y esa
+> recomendación se retiró porque el resultado **parece hecho por un niño**: un
+> dibujo programático sale con todos los ángulos iguales y ninguna irregularidad,
+> y en una página de producto eso no se lee como minimalismo. Úsalos solo
+> mientras no haya reemplazo.
 
-`https://cdn.jsdelivr.net/gh/Evetev-Dev/brand@1/ilustraciones/conjunto-residencial-color.svg`
+| archivo | escena | estado |
+|---|---|---|
+| `conjunto-residencial-color.svg` | conjunto residencial, para **EveConecta** | dibujado a mano — **a reemplazar** |
+| `flujo-de-pago.svg` | tarjeta → datáfono → caja, para **EvePay** | dibujado a mano — **a reemplazar** |
+| `conjunto-residencial.svg` | la misma escena en una sola tinta | dibujado a mano — **a reemplazar** |
+| `comercio.svg` | calle de comercios | superada: ilustraba edificios para una pasarela de pagos |
+| `conjunto-residencial.webp` | primera versión generada | anterior al prompt; tiene trazos violeta |
 
-**`flujo-de-pago.svg`** (viewBox 1344×768) — la tarjeta del cliente, el datáfono
-del comercio y la caja donde cae el dinero, unidos por dos flechas. Para
-**EvePay**, la pasarela de pagos. Color en el cuerpo de la tarjeta (`#144A96`) y
-en la rueda de la caja (`#16A34A`), y halo.
+Las URLs siguen el patrón de siempre:
 
-`https://cdn.jsdelivr.net/gh/Evetev-Dev/brand@1/ilustraciones/flujo-de-pago.svg`
+`https://cdn.jsdelivr.net/gh/Evetev-Dev/brand@1/ilustraciones/<archivo>`
 
-Las dos son **las buenas** de su producto, y son hermanas a propósito: misma
-dirección de fuga, mismo lienzo, mismas cotas de color y de halo. Puestas una al
-lado de otra tienen que parecer la misma mano.
+Lo que **sí** sigue vigente de esa etapa, y hay que conservar al rehacerlas:
 
-**Misma mano, no mismo asunto.** Es la distinción que costó una versión: la
-primera escena de EvePay fue una calle de comercios, construida copiando la de
-EveConecta —prismas con rejilla de ventanas—, y esas rejillas ganan la lectura.
-La portada de una pasarela de pagos acababa ilustrando ladrillo. Lo que se
-comparte es el **estilo**; el **tema** lo pone cada producto.
+- **El color va a los lados, y es un requisito, no composición.** Las portadas
+  le abren al dibujo un hueco radial en el centro para que las líneas no crucen
+  el titular. Un elemento con color puesto al medio cae dentro del hueco y no se
+  ve — comprobado en el navegador con una versión centrada: no aparecía ni
+  subiendo la opacidad.
+- **Misma mano, no mismo asunto.** Las escenas comparten estilo —trazo, fuga,
+  halo, la regla de los dos colores—; el tema lo pone cada producto. La primera
+  escena de EvePay fue una calle de comercios copiada de la de EveConecta, y la
+  portada de una pasarela de pagos acababa ilustrando ladrillo.
+- **La transparencia es obligatoria.** Van de fondo con `contain`, así que sobra
+  ancho a los lados: con un blanco opaco se ve el rectángulo de la imagen
+  recortado contra el degradado. En el WebP hay que convertir el blanco a alfa.
+- **Van atenuadas y desvanecidas**, nunca a plena opacidad detrás de un texto.
 
-`comercio.svg` es esa primera escena. **Superada**, pero se mantiene publicada
-porque la regla 2 dice que lo publicado no se retira. No la uses: para EvePay
-está `flujo-de-pago.svg`, y para una escena de edificios está la de EveConecta.
-
-### El halo
-
-Las dos llevan el «glow controlado» que pide el prompt (§4). En un raster el
-modelo lo resuelve solo; en SVG son **dos capas**: la escena desenfocada debajo,
-sin rellenos, y la nítida encima. Sin quitarle los rellenos a la capa de abajo
-el desenfoque da una nube gris alrededor de cada volumen en vez de un halo en
-las líneas, y además tapa el halo de lo que tiene detrás.
-
-`stdDeviation="5"` sobre un lienzo de 1344, elegido mirando: a 2,2 no se ve
-—estas escenas se muestran a menos de la mitad de su tamaño y el desenfoque se
-encoge con ellas— y a 7 se mete dentro de las caras blancas y el dibujo pierde
-el filo de plano. **Es relativo al viewBox**, así que si algún día cambia el
-ancho del lienzo hay que volver a mirarlo.
-
-Cuesta unos 6 KB por archivo, que es el precio de duplicar la geometría.
-
-Es una escena densa: va de fondo, atenuada y desvanecida, nunca a plena opacidad
-detrás de un texto.
-
-**El color va a los lados, y eso no es composición: es un requisito.** La landing
-de EveConecta la usa de fondo abriéndole un hueco radial en el centro, para que
-las líneas no crucen el titular. Cualquier elemento con color puesto al medio cae
-dentro de ese hueco y no se ve — comprobado en el navegador con una versión que
-tenía la torre y el árbol centrados: no aparecían ni subiendo la opacidad.
-
-Pesa 6,7 KB. Se probó antes una versión raster de la misma escena y pesaba
-202 KB, de los cuales 106 KB eran solo el canal alfa —imprescindible, porque con
-`contain` sobra ancho a los lados y un blanco opaco dibujaría el rectángulo de la
-imagen recortado contra el degradado—. En SVG la transparencia es gratis. Por eso
-el manual dice que estas escenas se dibujen en SVG siempre que se pueda.
-
-`conjunto-residencial.svg` (viewBox 1344×768) es la versión de una sola tinta,
-sin color. Sigue publicada; úsala donde el color de los dos elementos no aporte.
-
-**Ningún SVG de esta carpeta se edita a mano.** Cada escena tiene su script en
-`packages/brand/ilustraciones/` del monorepo —`conjunto-residencial.py`,
-`flujo-de-pago.py` y el superado `comercio.py`—, y todos comprueban al generar
-que no queden trazos a menos de 24 unidades, la regla que más cuesta cumplir a
-ojo. Toca el script y regenera.
-
-Los dos aceptan `--sin-color` y `--sin-glow`. `--sin-glow` no es un capricho:
-existe para poder reproducir `conjunto-residencial.svg` **byte a byte** tal como
-está publicado, y esa comprobación es la que demuestra que un cambio nuevo no
-movió la escena.
-
-`conjunto-residencial.webp` (1344×768) es la primera versión generada.
-**Superada**, pero se mantiene publicada porque la regla 2 dice que lo publicado
-no se retira. No la uses en algo nuevo: tiene trazos violeta que se salen de la
-paleta.
+Los scripts de Python que generaron los `.svg` siguen en
+`packages/brand/ilustraciones/` del monorepo. **No los uses para hacer una escena
+nueva**; quedan como referencia de las cotas —dirección de fuga, lienzo,
+posiciones del color— hasta que las versiones generadas los sustituyan.
 
 **Las ilustraciones se generan con un prompt fijo**, para que parezcan una
 familia y no un muestrario: está en `evetev_brand_styles.md` §4, «Ilustraciones
