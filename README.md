@@ -206,6 +206,7 @@ de contraste T1/T2 — pero sí la regla de que el texto encima tenga que leerse
 | archivo | escena | estado |
 |---|---|---|
 | `conjunto-residencial-calle.webp` | calle residencial, para **EveConecta** | **generada con el prompt vigente — usa esta** |
+| `pasarela-de-pago.webp` | tarjeta → datáfono → caja fuerte, para **EvePay** | **generada con el prompt vigente — usa esta** |
 | `conjunto-residencial-color.svg` | conjunto residencial, para **EveConecta** | dibujado a mano — **a reemplazar** |
 | `flujo-de-pago.svg` | tarjeta → datáfono → caja, para **EvePay** | dibujado a mano — **a reemplazar** |
 | `conjunto-residencial.svg` | la misma escena en una sola tinta | dibujado a mano — **a reemplazar** |
