@@ -192,7 +192,8 @@ Escenas de producto, no marca. A diferencia de logos y mascota, **no representan
 a Evetev**: ilustran el contexto de una vertical. Por eso no las rigen las reglas
 de contraste T1/T2 — pero sí la regla de que el texto encima tenga que leerse.
 
-> **Toda esta carpeta está pendiente de rehacerse.** Los cinco archivos de abajo
+> **Casi toda esta carpeta está pendiente de rehacerse.** Solo la primera fila
+> cumple la norma vigente. Los cinco archivos siguientes
 > siguen publicados —lo publicado no se retira— pero **ninguno cumple la norma
 > vigente**, que es: las escenas se **generan** con el prompt del manual (§4) y
 > se publican en **WebP con transparencia**. Los cuatro `.svg` se dibujaron a
@@ -204,6 +205,7 @@ de contraste T1/T2 — pero sí la regla de que el texto encima tenga que leerse
 
 | archivo | escena | estado |
 |---|---|---|
+| `conjunto-residencial-calle.webp` | calle residencial, para **EveConecta** | **generada con el prompt vigente — usa esta** |
 | `conjunto-residencial-color.svg` | conjunto residencial, para **EveConecta** | dibujado a mano — **a reemplazar** |
 | `flujo-de-pago.svg` | tarjeta → datáfono → caja, para **EvePay** | dibujado a mano — **a reemplazar** |
 | `conjunto-residencial.svg` | la misma escena en una sola tinta | dibujado a mano — **a reemplazar** |
