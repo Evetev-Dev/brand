@@ -240,8 +240,28 @@ posiciones del color— hasta que las versiones generadas los sustituyan.
 
 **Las ilustraciones se generan con un prompt fijo**, para que parezcan una
 familia y no un muestrario: está en `evetev_brand_styles.md` §4, «Ilustraciones
-de apoyo». Ahí también está qué hacer antes de publicar una nueva, incluido
-**etiquetar** — sin etiqueta `@1` no la sirve.
+de apoyo». Ahí también está qué hacer antes de publicar una nueva.
+
+## Etiquetar ya no es cosa tuya
+
+**Al entrar cualquier activo en `main`, un workflow etiqueta la versión menor
+siguiente y purga `@1` en jsDelivr**, y comprueba que lo que cambió se sirve de
+verdad antes de darse por bueno. Está en `.github/workflows/publicar.yml`.
+
+Se automatizó porque el paso manual se olvidaba, y su fallo es de los que no se
+ven: el archivo está bien, el CSS está bien, y la página no se ve.
+
+- **v1.3.0** se etiquetó *antes* de mezclar el PR, así que apuntaba a un árbol
+  sin el contenido nuevo.
+- **v1.8.0** no se etiquetó en absoluto. La landing de EvePay apuntaba a un
+  archivo que existía en `main` pero no en ninguna versión publicada, y la
+  portada estuvo **dos días sin fondo**.
+
+El workflow corre después del merge por definición, así que el orden —mezclar
+primero, etiquetar después— deja de depender de que alguien se acuerde.
+
+**Los cambios que solo tocan `.md` no gastan versión:** la documentación no
+cambia lo que sirve el CDN.
 
 ### `tokens/`
 

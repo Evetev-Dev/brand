@@ -1,0 +1,113 @@
+name: Publicar
+
+# Etiqueta y purga sola cuando entra un activo en main.
+#
+# POR QUÉ EXISTE. El ritual era manual —mezclar, etiquetar, purgar— y el paso
+# de etiquetar se olvida. Ha pasado dos veces:
+#
+#   v1.3.0  se etiquetó ANTES de mezclar el PR, así que apuntaba a un árbol sin
+#           el contenido nuevo y @1 servía lo viejo.
+#   v1.8.0  no se etiquetó en absoluto. La landing de EvePay apuntaba a un
+#           archivo que existía en main pero no en ninguna versión publicada, y
+#           la portada estuvo DOS DÍAS sin fondo. Nada parecía roto.
+#
+# Los dos fallos comparten forma: el archivo está bien, el CSS está bien, y la
+# página no se ve. Automatizarlo es lo único que los elimina, porque el orden
+# —mezclar primero, etiquetar después— aquí ya no lo decide una persona: el
+# workflow corre DESPUÉS del merge, por definición.
+on:
+  push:
+    branches: [main]
+    # La documentación no cambia lo que sirve el CDN, así que no gasta versión.
+    paths-ignore:
+      - '**.md'
+      - '.github/**'
+
+# Para poder empujar la etiqueta.
+permissions:
+  contents: write
+
+jobs:
+  etiquetar:
+    name: Etiquetar y purgar
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # hacen falta las etiquetas y el commit anterior
+
+      - name: Calcular la versión siguiente
+        id: version
+        run: |
+          set -euo pipefail
+          # --sort=v:refname ordena por VERSIÓN, no por texto. No es un detalle:
+          # ordenando como texto, v1.9.0 va después de v1.10.0 y la etiqueta
+          # nueva saldría hacia atrás. Ya estamos en la decena, así que esto
+          # importa desde hoy.
+          ULTIMA=$(git tag --sort=-v:refname | grep -E '^v1\.[0-9]+\.[0-9]+$' | head -1)
+          echo "Última etiqueta: ${ULTIMA:-ninguna}"
+          MENOR=$(echo "${ULTIMA:-v1.0.0}" | cut -d. -f2)
+          NUEVA="v1.$((MENOR + 1)).0"
+          echo "Nueva etiqueta:  $NUEVA"
+          echo "tag=$NUEVA" >> "$GITHUB_OUTPUT"
+
+      - name: Qué activos cambiaron
+        id: activos
+        run: |
+          set -euo pipefail
+          ANTES="${{ github.event.before }}"
+          # En el primer push de una rama, o tras un force-push, `before` puede
+          # ser todo ceros o no existir en el clon. Se cae al último commit.
+          if ! git cat-file -e "${ANTES}^{commit}" 2>/dev/null; then
+            ANTES="${{ github.sha }}^"
+          fi
+          git diff --name-only "$ANTES" "${{ github.sha }}" \
+            | grep -vE '\.md$|^\.github/' > cambiados.txt || true
+          echo "Activos cambiados:"
+          sed 's/^/  /' cambiados.txt
+
+      - name: Etiquetar
+        run: |
+          set -euo pipefail
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag -a "${{ steps.version.outputs.tag }}" \
+            -m "${{ steps.version.outputs.tag }} — publicado automáticamente al entrar en main"
+          git push origin "${{ steps.version.outputs.tag }}"
+
+      - name: Purgar y comprobar
+        run: |
+          set -uo pipefail
+          # Etiquetar no basta: jsDelivr cachea la resolución del rango @1, así
+          # que hasta que se purga sigue sirviendo el árbol anterior. Y purgar
+          # tampoco basta por sí solo: si no se comprueba después, un fallo aquí
+          # es invisible hasta que alguien abre la página.
+          FALLOS=0
+          while IFS= read -r ruta; do
+            [ -n "$ruta" ] || continue
+            [ -f "$ruta" ] || continue          # los borrados no se comprueban
+            URL="https://cdn.jsdelivr.net/gh/Evetev-Dev/brand@1/$ruta"
+            curl -s "https://purge.jsdelivr.net/gh/Evetev-Dev/brand@1/$ruta" -o /dev/null
+            # La etiqueta tarda unos segundos en ser visible para jsDelivr, así
+            # que se reintenta en vez de fallar al primer 404.
+            codigo=000
+            for intento in 1 2 3 4 5 6; do
+              sleep 5
+              codigo=$(curl -sSL -o /dev/null -w '%{http_code}' --max-time 20 -I "$URL" || echo 000)
+              [ "$codigo" = "200" ] && break
+              curl -s "https://purge.jsdelivr.net/gh/Evetev-Dev/brand@1/$ruta" -o /dev/null
+            done
+            if [ "$codigo" = "200" ]; then
+              echo "  ok   $URL"
+            else
+              echo "  $codigo  $URL"
+              FALLOS=$((FALLOS + 1))
+            fi
+          done < cambiados.txt
+
+          if [ "$FALLOS" -gt 0 ]; then
+            echo "::error::$FALLOS activos no se sirven por @1 tras etiquetar y purgar."
+            echo "La etiqueta ${{ steps.version.outputs.tag }} SÍ se creó: revisa jsDelivr a mano."
+            exit 1
+          fi
+          echo "Todo lo que cambió se sirve por @1."
